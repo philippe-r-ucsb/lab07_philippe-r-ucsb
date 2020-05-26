@@ -4,16 +4,16 @@
 
 #include <string>
 
-void assertEquals(std::string expected, 
-		  std::string actual, 
+void assertEquals(std::string expected,
+		  std::string actual,
 		  std::string message="");
 
-void assertEquals(int expected, 
-		  int actual, 
+void assertEquals(int expected,
+		  int actual,
 		  std::string message="");
 
-void assertEquals(Node* expected, 
-		  Node* actual, 
+void assertEquals(Node* expected,
+		  Node* actual,
 		  std::string message);
 
 #define ASSERT_EQUALS(expected,actual) assertEquals(expected,actual,#actual)

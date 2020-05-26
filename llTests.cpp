@@ -17,8 +17,7 @@ int main(int argc, char* argv[]) {
       int threeNums[3]={42,57,61};
       LinkedList *list = arrayToLinkedList(threeNums,3);
       LinkedList *empty = new LinkedList();
-      empty->head = NULL;
-      empty->tail = NULL;
+      empty->inner = NULL;
 
       ASSERT_EQUALS( "[42]->[57]->[61]->null", linkedListToString(list));
       addIntToEndOfList(list, 12);
@@ -41,8 +40,7 @@ int main(int argc, char* argv[]) {
       int threeNums[3]={42,57,61};
       LinkedList *list = arrayToLinkedList(threeNums,3);
       LinkedList *empty = new LinkedList();
-      empty->head = NULL;
-      empty->tail = NULL;
+      empty->inner = NULL;
 
       ASSERT_EQUALS( "[42]->[57]->[61]->null", linkedListToString(list));
       addIntToStartOfList(list, 12);
@@ -73,26 +71,26 @@ int main(int argc, char* argv[]) {
 
       ASSERT_NOT_NULL(pointerToMax(list1));
       if(pointerToMax(list1) != 0) { //pointer not NULL
-	ASSERT_EQUALS(list1->head, pointerToMax(list1));
+	ASSERT_EQUALS(list1->inner, pointerToMax(list1));
 	ASSERT_EQUALS(73, pointerToMax(list1)->data);
 	ASSERT_EQUALS(57, pointerToMax(list1)->next->data);
       }
 
       ASSERT_NOT_NULL(pointerToMax(list2));
       if(pointerToMax(list2) != 0) { //pointer not NULL
-	ASSERT_EQUALS(list2->head->next, pointerToMax(list2));
+	ASSERT_EQUALS(list2->inner->next, pointerToMax(list2));
 	ASSERT_EQUALS(-4, pointerToMax(list2)->data);
       }
 
       ASSERT_NOT_NULL(pointerToMax(list3));
       if(pointerToMax(list3) != 0) { //pointer not NULL
-	ASSERT_EQUALS(list3->tail, pointerToMax(list3));
+	ASSERT_EQUALS(list3->inner->next->next->next, pointerToMax(list3));
 	ASSERT_EQUALS(4, pointerToMax(list3)->data);
       }
 
       ASSERT_NOT_NULL(pointerToMax(list4));
       if(pointerToMax(list4) != 0) { //pointer not NULL
-	ASSERT_EQUALS(list4->head->next, pointerToMax(list4));
+	ASSERT_EQUALS(list4->inner->next, pointerToMax(list4));
 	ASSERT_EQUALS(3, pointerToMax(list4)->data);
 	ASSERT_EQUALS(3, pointerToMax(list4)->next->data);
       }
@@ -117,26 +115,26 @@ int main(int argc, char* argv[]) {
 
       ASSERT_NOT_NULL(pointerToMin(list1));
       if(pointerToMin(list1) != 0) { //pointer not NULL
-	ASSERT_EQUALS(list1->head, pointerToMin(list1));
+	ASSERT_EQUALS(list1->inner, pointerToMin(list1));
 	ASSERT_EQUALS(13, pointerToMin(list1)->data);
 	ASSERT_EQUALS(57, pointerToMin(list1)->next->data);
       }
 
       ASSERT_NOT_NULL(pointerToMin(list2));
       if(pointerToMin(list2) != 0) { //pointer not NULL
-	ASSERT_EQUALS(list2->head->next, pointerToMin(list2));
+	ASSERT_EQUALS(list2->inner->next, pointerToMin(list2));
 	ASSERT_EQUALS(-57, pointerToMin(list2)->data);
       }
 
       ASSERT_NOT_NULL(pointerToMin(list3));
       if(pointerToMin(list3) != 0) { //pointer not NULL
-	ASSERT_EQUALS(list3->tail, pointerToMin(list3));
+	ASSERT_EQUALS(list3->inner->next->next->next, pointerToMin(list3));
 	ASSERT_EQUALS(0, pointerToMin(list3)->data);
       }
 
       ASSERT_NOT_NULL(pointerToMin(list4));
       if(pointerToMin(list4) != 0) { //pointer not NULL
-	ASSERT_EQUALS(list4->head->next, pointerToMin(list4));
+	ASSERT_EQUALS(list4->inner->next, pointerToMin(list4));
 	ASSERT_EQUALS(3, pointerToMin(list4)->data);
 	ASSERT_EQUALS(3, pointerToMin(list4)->next->data);
       }
