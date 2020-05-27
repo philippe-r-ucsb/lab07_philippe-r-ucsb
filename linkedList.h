@@ -7,7 +7,8 @@ struct Node {
 };
 
 struct LinkedList {
-  Node *inner;
+  Node *head;
+  Node *tail;
 };
 
 #endif // NODE_H

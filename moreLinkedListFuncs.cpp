@@ -2,24 +2,18 @@
 #include "linkedList.h"
 #include "linkedListFuncs.h"
 
-
-
 void addIntToEndOfList(LinkedList *list, int value) {
   assert(list!=NULL); // if list is NULL, we can do nothing.
 
   Node *p = new Node; // temporary pointer
   p->data = value;
 
-  if (list->inner == NULL) {
-    list->inner = p;
+  if(list->head == NULL) {
+    list->head = p;
   } else {
-    Node* last;
-    Node* iter;
-    for(iter = list->inner; iter->next != NULL; iter = iter->next) {}
-    last = iter;
-    last->next = p;
+    list->tail->next = p;
+    list->tail = list->tail->next;
   }
-
 }
 
 void addIntToStartOfList(LinkedList *list, int value) {
@@ -27,8 +21,12 @@ void addIntToStartOfList(LinkedList *list, int value) {
 
   Node* n = new Node;
   n->data = value;
-  n->next = list->inner;
-  list->inner = n;
+  n->next = list->head;
+  list->head = n;
+
+  if(list->tail == NULL) {
+    list->tail = list->head;
+  }
 }
 
 // list: ptr to a linked list of Node (each with int data, and Node * next)
@@ -43,9 +41,9 @@ Node * pointerToMax(LinkedList *list) {
   // Code may assume that these assertions are true;
   //  so does not need to do error checking for these conditions.
   assert(list!=NULL);
-  assert(list->inner != NULL);
+  assert(list->head != NULL);
 
-  Node* current = list->inner;
+  Node* current = list->head;
 
   Node* biggestNode = current;
 
@@ -71,9 +69,9 @@ Node * pointerToMin(LinkedList *list) {
   // Code may assume that these assertions are true;
   //  so does not need to do error checking for these conditions.
   assert(list!=NULL);
-  assert(list->inner != NULL);
+  assert(list->head != NULL);
 
-  Node* current = list->inner;
+  Node* current = list->head;
 
   Node* smallestNode = current;
 
@@ -97,7 +95,7 @@ int largestValue(LinkedList *list) {
   //  so does not need to do error checking for these conditions.
 
   assert(list!=NULL);
-  assert(list->inner != NULL);
+  assert(list->head != NULL);
 
   // TODO: Insert code here to calculate and return
   //   largest value in list (which may not be unique).
@@ -116,7 +114,7 @@ int smallestValue(LinkedList *list) {
   //  so does not need to do error checking for these conditions.
 
   assert(list!=NULL);
-  assert(list->inner != NULL);
+  assert(list->head != NULL);
 
   // TODO: Insert code here to calculate and return
   //   smallest value in list (which may not be unique).
@@ -135,7 +133,7 @@ int sum(LinkedList * list) {
 
   assert(list!=NULL);
   int sum = 0;
-  Node* head = list->inner;
+  Node* head = list->head;
   for(Node* current = head; current != NULL; current = current->next) {
     sum += current->data;
   }

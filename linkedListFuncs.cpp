@@ -14,21 +14,20 @@ LinkedList * arrayToLinkedList(int *a, int size) {
     return list;
   }
 
-  Node* current = new Node;
-  list->inner=current;
-  current->data = a[0];
+  Node* head = new Node;
+  head->data = a[0];
+  list->head = head;
+  list->tail = head;
 
-  for (int i=1; i<size; i++) {
+  for(int i = 1; i < size; i++) {
     Node* next = new Node;
     next->data = a[i];
-    current->next = next;
-    current = next;
+    list->tail->next = next;
+    list->tail = list->tail->next;
   }
 
-  return list; // return ptr to new list
-
+  return list;
 }
-
 // intToString converts an int to a string
 
 std::string intToString(int i) {
@@ -64,7 +63,7 @@ void freeLinkedList(LinkedList * list) {
 
   Node *next;
 
-  for (Node *p=list->inner; p!=NULL; p=next) {
+  for (Node *p=list->head; p!=NULL; p=next) {
     next = p->next;
     delete p;
   }
@@ -75,7 +74,7 @@ void freeLinkedList(LinkedList * list) {
 std::string linkedListToString(LinkedList *list) {
 
   std::string result="";
-  for (const Node *  p=list->inner; p!=NULL; p=p->next) {
+  for (const Node *  p=list->head; p!=NULL; p=p->next) {
     result += "[" + intToString(p->data) + "]->";
   }
   result += "null";
